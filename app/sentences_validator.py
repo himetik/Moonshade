@@ -13,22 +13,19 @@ def starts_with_uppercase(sentence):
 def ends_with_punctuation(sentence: str) -> bool:
     if not sentence:
         return False
-
     pattern = r'\S[.!?]$'
-
     return bool(re.search(pattern, sentence.strip()))
+
 
 def has_text_before_punctuation(sentence: str) -> bool:
     if not sentence:
         return False
-
     pattern = r'\S+[.!?]$'
-
     return bool(re.search(pattern, sentence.strip()))
 
 
 def has_no_extra_spaces(sentence):
-    return '  ' not in sentence and '\n' not in sentence
+    return not sentence.startswith(' ') and not sentence.endswith(' ') and '  ' not in sentence
 
 
 def is_within_length_limits(sentence):
@@ -36,7 +33,7 @@ def is_within_length_limits(sentence):
 
 
 def contains_valid_characters(sentence):
-    return bool(re.match(r'^[A-Za-z0-9.,!?\'":; \-]+$', sentence))
+    return bool(re.match(r'^[A-Za-z0-9.,!?\'":;()\-\s]+$', sentence))
 
 
 def is_single_word(sentence):
