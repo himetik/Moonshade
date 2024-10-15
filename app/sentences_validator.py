@@ -10,8 +10,21 @@ def starts_with_uppercase(sentence):
     return sentence[0].isupper() if sentence else False
 
 
-def ends_with_punctuation(sentence):
-    return sentence.endswith(('.', '!', '?')) if sentence else False
+def ends_with_punctuation(sentence: str) -> bool:
+    if not sentence:
+        return False
+
+    pattern = r'\S[.!?]$'
+
+    return bool(re.search(pattern, sentence.strip()))
+
+def has_text_before_punctuation(sentence: str) -> bool:
+    if not sentence:
+        return False
+
+    pattern = r'\S+[.!?]$'
+
+    return bool(re.search(pattern, sentence.strip()))
 
 
 def has_no_extra_spaces(sentence):
@@ -27,8 +40,8 @@ def contains_valid_characters(sentence):
 
 
 def is_single_word(sentence):
-    """Check if the sentence consists of a single word."""
     return len(sentence.split()) == 1
+
 
 def validate_sentence(sentence):
     if not is_not_empty(sentence): return False
